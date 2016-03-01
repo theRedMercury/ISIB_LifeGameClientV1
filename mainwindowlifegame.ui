@@ -17,7 +17,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#centralWidget{border-image: url(:/data/bg.jpg) 0 0 0 0 stretch stretch;}</string>
+   <string notr="true">QWidget#centralWidget{border-image: url(:/data/bg.png) 0 0 0 0 stretch stretch;}</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="autoFillBackground">

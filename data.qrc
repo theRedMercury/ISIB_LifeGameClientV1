@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>data/bg.jpg</file>
         <file>data/Greenscr.ttf</file>
+        <file>data/bg.png</file>
     </qresource>
 </RCC>
