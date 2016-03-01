@@ -2,6 +2,8 @@
 #define MAINWINDOWLIFEGAME_H
 
 #include <QMainWindow>
+#include <QFontDatabase>
+#include <QDebug>
 
 namespace Ui {
 class MainWindowLifeGame;

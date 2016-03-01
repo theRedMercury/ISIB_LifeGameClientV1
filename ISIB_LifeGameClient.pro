@@ -18,3 +18,6 @@ SOURCES += main.cpp\
 HEADERS  += mainwindowlifegame.h
 
 FORMS    += mainwindowlifegame.ui
+
+RESOURCES += \
+    data.qrc
