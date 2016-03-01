@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFontDatabase>
+#include <QTimer>
 #include <QDebug>
 
 namespace Ui {
@@ -17,8 +18,12 @@ public:
     explicit MainWindowLifeGame(QWidget *parent = 0);
     ~MainWindowLifeGame();
 
+private slots:
+    void updateDots();
 private:
     Ui::MainWindowLifeGame *ui;
+    QTimer *timerDots;
+
 };
 
 #endif // MAINWINDOWLIFEGAME_H
