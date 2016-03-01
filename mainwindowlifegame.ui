@@ -217,8 +217,8 @@ QProgressBar::chunk
    <widget class="QLabel" name="labelDotAnim">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>220</y>
+      <x>240</x>
+      <y>10</y>
       <width>211</width>
       <height>41</height>
      </rect>
