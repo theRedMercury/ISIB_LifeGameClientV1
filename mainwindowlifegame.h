@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QFontDatabase>
+#include <QTcpSocket>
+#include <QScrollBar>
 #include <QTimer>
 #include <QDebug>
 
@@ -18,11 +20,20 @@ public:
     explicit MainWindowLifeGame(QWidget *parent = 0);
     ~MainWindowLifeGame();
 
-private slots:
+private slots :
+    void readTcpData();
     void updateDots();
+
 private:
+    int dataTab[4] ;
+
     Ui::MainWindowLifeGame *ui;
     QTimer *timerDots;
+    QTcpSocket *socket;
+    QScrollBar *sbTree;
+    QScrollBar *sbHerbi;
+    QScrollBar *sbCarni;
+    QScrollBar *sbBrut;
 
 };
 
