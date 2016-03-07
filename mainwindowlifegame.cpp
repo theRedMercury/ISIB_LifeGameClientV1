@@ -61,42 +61,42 @@ MainWindowLifeGame::MainWindowLifeGame(QWidget *parent) :
 
 void MainWindowLifeGame::readTcpData()
 {
-    QRegularExpression Tnbr("Tree NBR ([0-9]+)");
-    QRegularExpression Herbr("Herbi NBR ([0-9]+)");
-    QRegularExpression Carbr("Carni NBR ([0-9]+)");
-    QRegularExpression YearBr("YEAR ([0-9]+)");
+    QRegExp Tnbr("Tree NBR ([0-9]+)");
+    QRegExp Herbr("Herbi NBR ([0-9]+)");
+    QRegExp Carbr("Carni NBR ([0-9]+)");
+    QRegExp YearBr("YEAR ([0-9]+)");
 
     QString data =  this->socket->readAll();
     //this->socket->flush();
     ui->textEditBrut->setText(ui->textEditBrut->toPlainText()+">"+data);
     this->sbBrut->setValue(sbBrut->maximum());
 
-    QRegularExpressionMatch matchT = Tnbr.match(data);
-    QRegularExpressionMatch matchH = Herbr.match(data);
-    QRegularExpressionMatch matchC = Carbr.match(data);
-    QRegularExpressionMatch matchY = YearBr.match(data);
-
-    if(matchT.hasMatch())
+   :: qDebug() << Tnbr.indexIn(data);
+    if(Tnbr.indexIn(data)==0)
     {
-        this->dataTab[0]=matchT.captured(1).toInt() / 10.0;
-        ui->textEditTree->setText(ui->textEditTree->toPlainText()+"\n"+matchT.captured(1));
+        this->dataTab[0]=Tnbr.cap(1).toInt() / 10.0;
+        ui->textEditTree->setText(ui->textEditTree->toPlainText()+"\n"+Tnbr.cap(1));
         this->sbTree->setValue(sbTree->maximum());
     }
-    if(matchH.hasMatch())
+
+    if(Herbr.indexIn(data)==0)
     {
-        this->dataTab[1]=matchH.captured(1).toInt();
-        ui->textEditHerbi->setText(ui->textEditHerbi->toPlainText()+"\n"+matchH.captured(1));
+
+        this->dataTab[1]=Herbr.cap(1).toInt();
+        ui->textEditHerbi->setText(ui->textEditHerbi->toPlainText()+"\n"+Herbr.cap(1));
         this->sbHerbi->setValue(sbHerbi->maximum());
     }
-    if(matchC.hasMatch())
+
+    if(Carbr.indexIn(data)==0)
     {
-        this->dataTab[2]=matchC.captured(1).toInt();
-        ui->textEditCarni->setText(ui->textEditCarni->toPlainText()+"\n"+matchC.captured(1));
+        this->dataTab[2]=Carbr.cap(1).toInt();
+        ui->textEditCarni->setText(ui->textEditCarni->toPlainText()+"\n"+Carbr.cap(1));
         this->sbCarni->setValue(sbCarni->maximum());
     }
-    if(matchY.hasMatch())
+
+    if(YearBr.indexIn(data)==0)
     {
-        ui->labelYear->setText("Annee : "+matchY.captured(1));
+        ui->labelYear->setText("Annee : "+YearBr.cap(1));
     }
 
     //qDebug() << this->dataTab[0] << " - " << this->dataTab[1] << " - " << this->dataTab[2] << "\n";

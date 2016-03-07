@@ -5,6 +5,7 @@
 #include <QFontDatabase>
 #include <QTcpSocket>
 #include <QScrollBar>
+#include <QRegExp>
 #include <QTimer>
 #include <QDebug>
 
