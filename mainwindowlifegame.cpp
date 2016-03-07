@@ -12,10 +12,16 @@ MainWindowLifeGame::MainWindowLifeGame(QWidget *parent) :
 
     this->socket = new QTcpSocket(this);
     this->connect(this->socket, SIGNAL(readyRead()), SLOT(readTcpData()) );
-    this->socket->connectToHost("127.0.0.1", 11900);
+
+    QSettings settings("conf.ini", QSettings::IniFormat);
+    QString ip = settings.value("OPTIONS/IP","127.0.0.1").toString();
+    quint16 port = settings.value("OPTIONS/PORT", 11900).toInt();
+
+    this->socket->connectToHost(ip,port);
+    qDebug() << "Address "<<ip<<":"<<port;
 
     if( this->socket->waitForConnected(500) ) {
-       qDebug() << "Connected";
+       qDebug() << "Connected"  ;
        this->socket->write("HELLO SERVER[/TCP]");
        this->socket->flush();
     }
@@ -27,6 +33,7 @@ MainWindowLifeGame::MainWindowLifeGame(QWidget *parent) :
     this->dataTab[0]=0;
     this->dataTab[1]=0;
     this->dataTab[2]=0;
+    this->dataTab[3]=0;
 
     ui->setupUi(this);
 
@@ -42,6 +49,9 @@ MainWindowLifeGame::MainWindowLifeGame(QWidget *parent) :
     this->sbBrut = ui->textEditBrut->verticalScrollBar();
     this->sbBrut->setValue(this->sbBrut->maximum());
 
+    this->sbInvad = ui->textEditInvad->verticalScrollBar();
+    this->sbInvad->setValue(this->sbInvad->maximum());
+
     ui->label->setFont(Greenscr);
     ui->label->setSizePolicy(QSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed));
     ui->labelYear->setFont(Greenscr);
@@ -56,6 +66,7 @@ MainWindowLifeGame::MainWindowLifeGame(QWidget *parent) :
     ui->textEditHerbi->setFont(Greenscr);
     ui->textEditCarni->setFont(Greenscr);
     ui->textEditBrut->setFont(Greenscr);
+    ui->textEditInvad->setFont(Greenscr);
 }
 
 
@@ -64,14 +75,16 @@ void MainWindowLifeGame::readTcpData()
     QRegExp Tnbr("Tree NBR ([0-9]+)");
     QRegExp Herbr("Herbi NBR ([0-9]+)");
     QRegExp Carbr("Carni NBR ([0-9]+)");
+    QRegExp Invbr("Invad NBR ([0-9]+)");
     QRegExp YearBr("YEAR ([0-9]+)");
 
     QString data =  this->socket->readAll();
     //this->socket->flush();
+
     ui->textEditBrut->setText(ui->textEditBrut->toPlainText()+">"+data);
     this->sbBrut->setValue(sbBrut->maximum());
 
-   :: qDebug() << Tnbr.indexIn(data);
+    //qDebug() << Tnbr.indexIn(data);
     if(Tnbr.indexIn(data)==0)
     {
         this->dataTab[0]=Tnbr.cap(1).toInt() / 10.0;
@@ -81,7 +94,6 @@ void MainWindowLifeGame::readTcpData()
 
     if(Herbr.indexIn(data)==0)
     {
-
         this->dataTab[1]=Herbr.cap(1).toInt();
         ui->textEditHerbi->setText(ui->textEditHerbi->toPlainText()+"\n"+Herbr.cap(1));
         this->sbHerbi->setValue(sbHerbi->maximum());
@@ -94,16 +106,31 @@ void MainWindowLifeGame::readTcpData()
         this->sbCarni->setValue(sbCarni->maximum());
     }
 
+    if(Invbr.indexIn(data)==0)
+    {
+        this->dataTab[3]=Invbr.cap(1).toInt();
+        ui->textEditInvad->setText(ui->textEditInvad->toPlainText()+"\n"+Invbr.cap(1));
+        this->sbInvad->setValue(sbInvad->maximum());
+    }
+
     if(YearBr.indexIn(data)==0)
     {
         ui->labelYear->setText("Annee : "+YearBr.cap(1));
     }
 
     //qDebug() << this->dataTab[0] << " - " << this->dataTab[1] << " - " << this->dataTab[2] << "\n";
-    int sumD = this->dataTab[0]+this->dataTab[1]+this->dataTab[2];
+    int sumD = this->dataTab[0]+this->dataTab[1]+this->dataTab[2]+this->dataTab[3];
     ui->progressBarTree->setValue((int)((double)(this->dataTab[0]/(float)sumD)*100.0f));
     ui->progressBarHerbi->setValue((int)((double)(this->dataTab[1]/(float)sumD)*100.0f));
     ui->progressBarCarni->setValue((int)((double)(this->dataTab[2]/(float)sumD)*100.0f));
+    ui->progressBarInvade->setValue((int)((double)(this->dataTab[3]/(float)sumD)*100.0f));
+}
+void MainWindowLifeGame::pushButton()
+{
+    QString d = "PUSH But[/TCP]";
+    qDebug() << d;
+    this->socket->write(d.toStdString().c_str());
+    this->socket->flush();
 }
 
 void MainWindowLifeGame::updateDots()

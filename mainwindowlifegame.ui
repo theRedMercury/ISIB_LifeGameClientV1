@@ -79,9 +79,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>120</y>
+      <y>130</y>
       <width>151</width>
-      <height>131</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -99,9 +99,9 @@
    <widget class="QProgressBar" name="progressBarTree">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>490</x>
       <y>20</y>
-      <width>281</width>
+      <width>301</width>
       <height>41</height>
      </rect>
     </property>
@@ -132,9 +132,9 @@ QProgressBar::chunk
    <widget class="QProgressBar" name="progressBarHerbi">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>490</x>
       <y>70</y>
-      <width>281</width>
+      <width>301</width>
       <height>41</height>
      </rect>
     </property>
@@ -165,9 +165,9 @@ QProgressBar::chunk
    <widget class="QProgressBar" name="progressBarCarni">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>490</x>
       <y>120</y>
-      <width>281</width>
+      <width>301</width>
       <height>41</height>
      </rect>
     </property>
@@ -229,9 +229,9 @@ QProgressBar::chunk
    <widget class="QProgressBar" name="progressBarInvade">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>490</x>
       <y>170</y>
-      <width>281</width>
+      <width>301</width>
       <height>41</height>
      </rect>
     </property>
@@ -262,10 +262,10 @@ QProgressBar::chunk
    <widget class="QTextEdit" name="textEditTree">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>180</y>
-      <width>141</width>
-      <height>381</height>
+      <x>10</x>
+      <y>170</y>
+      <width>111</width>
+      <height>411</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -273,10 +273,10 @@ QProgressBar::chunk
 background-color: rgb(0, 0, 0,0);</string>
     </property>
     <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
+     <enum>QFrame::Box</enum>
     </property>
     <property name="frameShadow">
-     <enum>QFrame::Sunken</enum>
+     <enum>QFrame::Plain</enum>
     </property>
     <property name="verticalScrollBarPolicy">
      <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -288,10 +288,10 @@ background-color: rgb(0, 0, 0,0);</string>
    <widget class="QTextEdit" name="textEditHerbi">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>180</y>
-      <width>141</width>
-      <height>381</height>
+      <x>130</x>
+      <y>170</y>
+      <width>111</width>
+      <height>411</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -299,10 +299,10 @@ background-color: rgb(0, 0, 0,0);</string>
 background-color: rgb(0, 0, 0,0);</string>
     </property>
     <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
+     <enum>QFrame::Box</enum>
     </property>
     <property name="frameShadow">
-     <enum>QFrame::Sunken</enum>
+     <enum>QFrame::Plain</enum>
     </property>
     <property name="verticalScrollBarPolicy">
      <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -314,10 +314,10 @@ background-color: rgb(0, 0, 0,0);</string>
    <widget class="QTextEdit" name="textEditCarni">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>180</y>
-      <width>141</width>
-      <height>371</height>
+      <x>250</x>
+      <y>170</y>
+      <width>111</width>
+      <height>411</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -325,10 +325,10 @@ background-color: rgb(0, 0, 0,0);</string>
 background-color: rgb(0, 0, 0,0);</string>
     </property>
     <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
+     <enum>QFrame::Box</enum>
     </property>
     <property name="frameShadow">
-     <enum>QFrame::Sunken</enum>
+     <enum>QFrame::Plain</enum>
     </property>
     <property name="verticalScrollBarPolicy">
      <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -340,10 +340,10 @@ background-color: rgb(0, 0, 0,0);</string>
    <widget class="QTextEdit" name="textEditBrut">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>230</y>
-      <width>281</width>
-      <height>321</height>
+      <x>490</x>
+      <y>220</y>
+      <width>301</width>
+      <height>361</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -351,10 +351,36 @@ background-color: rgb(0, 0, 0,0);</string>
 background-color: rgb(0, 0, 0,0);</string>
     </property>
     <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
+     <enum>QFrame::Box</enum>
     </property>
     <property name="frameShadow">
-     <enum>QFrame::Sunken</enum>
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEditInvad">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>170</y>
+      <width>111</width>
+      <height>411</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 215, 0);
+background-color: rgb(0, 0, 0,0);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
     </property>
     <property name="verticalScrollBarPolicy">
      <enum>Qt::ScrollBarAlwaysOff</enum>

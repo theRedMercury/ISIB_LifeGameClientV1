@@ -6,6 +6,7 @@
 #include <QTcpSocket>
 #include <QScrollBar>
 #include <QRegExp>
+#include <QSettings>
 #include <QTimer>
 #include <QDebug>
 
@@ -19,6 +20,7 @@ class MainWindowLifeGame : public QMainWindow
 
 public:
     explicit MainWindowLifeGame(QWidget *parent = 0);
+    void pushButton();
     ~MainWindowLifeGame();
 
 private slots :
@@ -34,6 +36,7 @@ private:
     QScrollBar *sbTree;
     QScrollBar *sbHerbi;
     QScrollBar *sbCarni;
+    QScrollBar *sbInvad;
     QScrollBar *sbBrut;
 
 };
