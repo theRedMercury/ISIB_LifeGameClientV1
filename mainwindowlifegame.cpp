@@ -104,8 +104,6 @@ void MainWindowLifeGame::readTcpData()
     ui->progressBarTree->setValue((int)((double)(this->dataTab[0]/(float)sumD)*100.0f));
     ui->progressBarHerbi->setValue((int)((double)(this->dataTab[1]/(float)sumD)*100.0f));
     ui->progressBarCarni->setValue((int)((double)(this->dataTab[2]/(float)sumD)*100.0f));
-
-
 }
 
 void MainWindowLifeGame::updateDots()

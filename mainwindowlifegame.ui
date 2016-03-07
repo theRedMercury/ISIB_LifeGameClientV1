@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>960</width>
-    <height>434</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -99,7 +99,7 @@
    <widget class="QProgressBar" name="progressBarTree">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>510</x>
       <y>20</y>
       <width>281</width>
       <height>41</height>
@@ -125,11 +125,14 @@ QProgressBar::chunk
     <property name="value">
      <number>24</number>
     </property>
+    <property name="textVisible">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QProgressBar" name="progressBarHerbi">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>510</x>
       <y>70</y>
       <width>281</width>
       <height>41</height>
@@ -155,11 +158,14 @@ QProgressBar::chunk
     <property name="value">
      <number>50</number>
     </property>
+    <property name="textVisible">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QProgressBar" name="progressBarCarni">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>510</x>
       <y>120</y>
       <width>281</width>
       <height>41</height>
@@ -184,6 +190,9 @@ QProgressBar::chunk
     </property>
     <property name="value">
      <number>75</number>
+    </property>
+    <property name="textVisible">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QLabel" name="labelDotAnim">
@@ -220,7 +229,7 @@ QProgressBar::chunk
    <widget class="QProgressBar" name="progressBarInvade">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>510</x>
       <y>170</y>
       <width>281</width>
       <height>41</height>
@@ -246,6 +255,9 @@ QProgressBar::chunk
     <property name="value">
      <number>0</number>
     </property>
+    <property name="textVisible">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QTextEdit" name="textEditTree">
     <property name="geometry">
@@ -253,7 +265,7 @@ QProgressBar::chunk
       <x>20</x>
       <y>180</y>
       <width>141</width>
-      <height>221</height>
+      <height>381</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -279,7 +291,7 @@ background-color: rgb(0, 0, 0,0);</string>
       <x>170</x>
       <y>180</y>
       <width>141</width>
-      <height>221</height>
+      <height>381</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -305,7 +317,7 @@ background-color: rgb(0, 0, 0,0);</string>
       <x>320</x>
       <y>180</y>
       <width>141</width>
-      <height>221</height>
+      <height>371</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -328,10 +340,10 @@ background-color: rgb(0, 0, 0,0);</string>
    <widget class="QTextEdit" name="textEditBrut">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>510</x>
       <y>230</y>
       <width>281</width>
-      <height>171</height>
+      <height>321</height>
      </rect>
     </property>
     <property name="styleSheet">
