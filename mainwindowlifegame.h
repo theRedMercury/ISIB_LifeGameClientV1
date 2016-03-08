@@ -26,12 +26,14 @@ public:
 private slots :
     void readTcpData();
     void updateDots();
+    void changeBG();
 
 private:
     int dataTab[4] ;
 
     Ui::MainWindowLifeGame *ui;
     QTimer *timerDots;
+    QTimer *timerButt;
     QTcpSocket *socket;
     QScrollBar *sbTree;
     QScrollBar *sbHerbi;

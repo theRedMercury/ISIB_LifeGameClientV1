@@ -30,6 +30,10 @@ MainWindowLifeGame::MainWindowLifeGame(QWidget *parent) :
     this->timerDots->connect(this->timerDots, SIGNAL(timeout()),this, SLOT(updateDots()));
     this->timerDots->start(500);
 
+    this->timerButt = new QTimer();
+    this->timerButt->connect(this->timerButt, SIGNAL(timeout()),this, SLOT(changeBG()));
+
+
     this->dataTab[0]=0;
     this->dataTab[1]=0;
     this->dataTab[2]=0;
@@ -67,6 +71,8 @@ MainWindowLifeGame::MainWindowLifeGame(QWidget *parent) :
     ui->textEditCarni->setFont(Greenscr);
     ui->textEditBrut->setFont(Greenscr);
     ui->textEditInvad->setFont(Greenscr);
+
+    this->pushButton();
 }
 
 
@@ -127,10 +133,19 @@ void MainWindowLifeGame::readTcpData()
 }
 void MainWindowLifeGame::pushButton()
 {
-    QString d = "PUSH But[/TCP]";
-    qDebug() << d;
-    this->socket->write(d.toStdString().c_str());
-    this->socket->flush();
+    if(!this->timerButt->isActive()){
+        QString d = "PUSH But[/TCP]";
+        qDebug() << d;
+        this->socket->write(d.toStdString().c_str());
+        this->socket->flush();
+        ui->centralWidget->setStyleSheet("QWidget#centralWidget{border-image: url(:/data/bgRed.png) 0 0 0 0 stretch stretch;}");
+        this->timerButt->start(4000);
+    }
+}
+
+void MainWindowLifeGame::changeBG()
+{
+     ui->centralWidget->setStyleSheet("QWidget#centralWidget{border-image: url(:/data/bg.png) 0 0 0 0 stretch stretch;}");
 }
 
 void MainWindowLifeGame::updateDots()
