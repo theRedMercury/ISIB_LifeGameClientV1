@@ -3,5 +3,6 @@
         <file>data/bg.jpg</file>
         <file>data/Greenscr.ttf</file>
         <file>data/bg.png</file>
+        <file>data/bgRed.png</file>
     </qresource>
 </RCC>
