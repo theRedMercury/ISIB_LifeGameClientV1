@@ -108,6 +108,17 @@ void MainWindowLifeGame::readTcpData()
     {
         this->dataTab[0]=Tnbr.cap(1).toInt() / 10.0;
         ui->textEditTree->setText(ui->textEditTree->toPlainText()+"\n"+Tnbr.cap(1));
+
+        if (ui->textEditTree->toPlainText().size() > 80)
+        {
+             QTextCursor cursor = ui->textEditTree->textCursor();
+             cursor.movePosition(QTextCursor::Start);
+             cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, 5);
+             cursor.select(QTextCursor::LineUnderCursor);
+             cursor.removeSelectedText();
+             cursor.deletePreviousChar();
+             ui->textEditTree->setTextCursor(cursor);
+        }
         this->sbTree->setValue(sbTree->maximum());
     }
 
@@ -115,6 +126,16 @@ void MainWindowLifeGame::readTcpData()
     {
         this->dataTab[1]=Herbr.cap(1).toInt();
         ui->textEditHerbi->setText(ui->textEditHerbi->toPlainText()+"\n"+Herbr.cap(1));
+        if (ui->textEditHerbi->toPlainText().size() > 80)
+        {
+             QTextCursor cursor = ui->textEditHerbi->textCursor();
+             cursor.movePosition(QTextCursor::Start);
+             cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, 5);
+             cursor.select(QTextCursor::LineUnderCursor);
+             cursor.removeSelectedText();
+             cursor.deletePreviousChar();
+             ui->textEditHerbi->setTextCursor(cursor);
+        }
         this->sbHerbi->setValue(sbHerbi->maximum());
     }
 
@@ -122,6 +143,16 @@ void MainWindowLifeGame::readTcpData()
     {
         this->dataTab[2]=Carbr.cap(1).toInt();
         ui->textEditCarni->setText(ui->textEditCarni->toPlainText()+"\n"+Carbr.cap(1));
+        if (ui->textEditCarni->toPlainText().size() > 80)
+        {
+             QTextCursor cursor = ui->textEditCarni->textCursor();
+             cursor.movePosition(QTextCursor::Start);
+             cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, 5);
+             cursor.select(QTextCursor::LineUnderCursor);
+             cursor.removeSelectedText();
+             cursor.deletePreviousChar();
+             ui->textEditCarni->setTextCursor(cursor);
+        }
         this->sbCarni->setValue(sbCarni->maximum());
     }
 
@@ -129,6 +160,16 @@ void MainWindowLifeGame::readTcpData()
     {
         this->dataTab[3]=Invbr.cap(1).toInt();
         ui->textEditInvad->setText(ui->textEditInvad->toPlainText()+"\n"+Invbr.cap(1));
+        if (ui->textEditInvad->toPlainText().size() > 80)
+        {
+             QTextCursor cursor = ui->textEditInvad->textCursor();
+             cursor.movePosition(QTextCursor::Start);
+             cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, 5);
+             cursor.select(QTextCursor::LineUnderCursor);
+             cursor.removeSelectedText();
+             cursor.deletePreviousChar();
+             ui->textEditInvad->setTextCursor(cursor);
+        }
         this->sbInvad->setValue(sbInvad->maximum());
     }
 

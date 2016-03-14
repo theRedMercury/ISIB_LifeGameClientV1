@@ -177,9 +177,9 @@ QProgressBar::chunk
    <widget class="QLabel" name="labelDotAnim">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>260</x>
       <y>10</y>
-      <width>211</width>
+      <width>141</width>
       <height>41</height>
      </rect>
     </property>
@@ -242,9 +242,9 @@ QProgressBar::chunk
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>110</y>
+      <y>290</y>
       <width>91</width>
-      <height>401</height>
+      <height>211</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -268,9 +268,9 @@ background-color: rgb(0, 0, 0,0);</string>
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>110</y>
+      <y>290</y>
       <width>91</width>
-      <height>401</height>
+      <height>211</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -294,9 +294,9 @@ background-color: rgb(0, 0, 0,0);</string>
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>110</y>
+      <y>290</y>
       <width>91</width>
-      <height>401</height>
+      <height>211</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -322,7 +322,7 @@ background-color: rgb(0, 0, 0,0);</string>
       <x>410</x>
       <y>220</y>
       <width>241</width>
-      <height>291</height>
+      <height>281</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -346,9 +346,9 @@ background-color: rgb(0, 0, 0,0);</string>
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>110</y>
+      <y>290</y>
       <width>91</width>
-      <height>401</height>
+      <height>211</height>
      </rect>
     </property>
     <property name="styleSheet">
