@@ -5,7 +5,12 @@ MainWindowLifeGame::MainWindowLifeGame(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindowLifeGame)
 {
-
+/*
+export DISPLAY=":0.0"
+xhost +
+cd Desktop/ISIB_LifeGameClientV1/
+sudo DISPLAY=:0 ./ISIB_LifeGameClient
+*/
     this->rpiGpio = new mmapGpio();
     this->rpiGpio->setPinDir(this->pinNumIn,mmapGpio::INPUT);
 
@@ -80,6 +85,7 @@ MainWindowLifeGame::MainWindowLifeGame(QWidget *parent) :
     this->timerGpio->start(250);
 
     QMainWindow::showFullScreen();
+    QApplication::setOverrideCursor(Qt::BlankCursor);
 }
 
 

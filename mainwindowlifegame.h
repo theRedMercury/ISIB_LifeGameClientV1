@@ -32,7 +32,7 @@ private slots :
 
 private:
     int dataTab[4] ;
-    unsigned int pinNumIn = 14;
+    unsigned int pinNumIn = 4;
     mmapGpio *rpiGpio;
 
     Ui::MainWindowLifeGame *ui;
