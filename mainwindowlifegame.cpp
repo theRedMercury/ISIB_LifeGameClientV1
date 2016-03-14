@@ -79,6 +79,7 @@ MainWindowLifeGame::MainWindowLifeGame(QWidget *parent) :
 
     this->timerGpio->start(250);
 
+    QMainWindow::showFullScreen();
 }
 
 
