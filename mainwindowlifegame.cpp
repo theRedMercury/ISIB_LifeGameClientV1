@@ -78,7 +78,7 @@ MainWindowLifeGame::MainWindowLifeGame(QWidget *parent) :
     ui->textEditBrut->setFont(Greenscr);
     ui->textEditInvad->setFont(Greenscr);
 
-    this->timerGpio(250);
+    this->timerGpio->start(250);
 
 }
 
