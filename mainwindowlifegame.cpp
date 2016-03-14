@@ -65,7 +65,6 @@ MainWindowLifeGame::MainWindowLifeGame(QWidget *parent) :
     ui->label->setFont(Greenscr);
     ui->label->setSizePolicy(QSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed));
     ui->labelYear->setFont(Greenscr);
-    ui->label_3->setFont(Greenscr);
     ui->labelDotAnim->setFont(Greenscr);
     ui->progressBarTree->setFont(Greenscr);
     ui->progressBarHerbi->setFont(Greenscr);
