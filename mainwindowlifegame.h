@@ -7,6 +7,7 @@
 #include <QScrollBar>
 #include <QRegExp>
 #include <QSettings>
+#include <QTextCursor>
 #include <QTimer>
 #include <QDebug>
 #include "mmapGpio.h"
@@ -26,6 +27,7 @@ public:
 
 private slots :
     void readTcpData();
+    void autoReconnect();
     void updateDots();
     void changeBG();
     void readGPIO();
@@ -34,18 +36,28 @@ private:
     int dataTab[4] ;
     unsigned int pinNumIn = 4;
     mmapGpio *rpiGpio;
+    QString ip;
+    quint16 port;
 
     Ui::MainWindowLifeGame *ui;
     QTimer *timerDots;
     QTimer *timerButt;
     QTimer *timerGpio;
     QTcpSocket *socket;
-    QScrollBar *sbTree;
+
+    QRegExp *tnbr;
+    QRegExp *herbr;
+    QRegExp *carbr;
+    QRegExp *invbr;
+    QRegExp *yearBr;
+    QString data;
+    QTextCursor cursor;
+
+    /*QScrollBar *sbTree;
     QScrollBar *sbHerbi;
     QScrollBar *sbCarni;
     QScrollBar *sbInvad;
-    QScrollBar *sbBrut;
-
+    QScrollBar *sbBrut;*/
 };
 
 #endif // MAINWINDOWLIFEGAME_H

@@ -14,25 +14,27 @@ sudo DISPLAY=:0 ./ISIB_LifeGameClient
     this->rpiGpio = new mmapGpio();
     this->rpiGpio->setPinDir(this->pinNumIn,mmapGpio::INPUT);
 
+   this->tnbr = new QRegExp ("Tree ([0-9]+)");
+   this->herbr = new QRegExp ("Herbi ([0-9]+)");
+   this->carbr  = new QRegExp ("Carni ([0-9]+)");
+   this->invbr  = new QRegExp ("Invad ([0-9]+)");
+   this->yearBr  = new QRegExp ("YEAR ([0-9]+)");
+
+
     int id = QFontDatabase::addApplicationFont("://data/Greenscr.ttf");
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     QFont Greenscr(family,18);
 
     this->socket = new QTcpSocket(this);
-    this->connect(this->socket, SIGNAL(readyRead()), SLOT(readTcpData()) );
+    this->connect(this->socket, SIGNAL(readyRead()), SLOT(readTcpData()));
+    this->connect(this->socket, SIGNAL(disconnected()), SLOT(autoReconnect()));
 
     QSettings settings("conf.ini", QSettings::IniFormat);
-    QString ip = settings.value("OPTIONS/IP","127.0.0.1").toString();
-    quint16 port = settings.value("OPTIONS/PORT", 11900).toInt();
+    this->ip = settings.value("OPTIONS/IP","127.0.0.1").toString();
+    this->port = settings.value("OPTIONS/PORT", 11900).toInt();
 
-    this->socket->connectToHost(ip,port);
-    qDebug() << "Address "<<ip<<":"<<port;
 
-    if( this->socket->waitForConnected(500) ) {
-       qDebug() << "Connected"  ;
-       this->socket->write("HELLO SERVER[/TCP]");
-       this->socket->flush();
-    }
+    //qDebug() << "Address "<<this->ip<<":"<<this->port;
 
     this->timerDots = new QTimer();
     this->timerDots->connect(this->timerDots, SIGNAL(timeout()),this, SLOT(updateDots()));
@@ -43,34 +45,35 @@ sudo DISPLAY=:0 ./ISIB_LifeGameClient
 
     this->timerGpio = new QTimer();
     this->timerGpio->connect(this->timerGpio, SIGNAL(timeout()),this, SLOT(readGPIO()));
-
+    this->timerGpio->start(100);
 
     this->dataTab[0]=0;
     this->dataTab[1]=0;
     this->dataTab[2]=0;
     this->dataTab[3]=0;
 
+    bool connected = false;
+    while(!(connected)){
+        this->socket->connectToHost(this->ip,this->port);
+        if( this->socket->waitForConnected(5000) ) {
+           this->socket->write("HELLO SERVER[/TCP]");
+           this->socket->flush();
+           connected = true;
+        }
+    }
+
     ui->setupUi(this);
 
-    this->sbTree = ui->textEditTree->verticalScrollBar();
-    this->sbTree->setValue(this->sbTree->maximum());
 
-    this->sbHerbi = ui->textEditHerbi->verticalScrollBar();
-    this->sbHerbi->setValue(this->sbHerbi->maximum());
-
-    this->sbCarni = ui->textEditCarni->verticalScrollBar();
-    this->sbCarni->setValue(this->sbCarni->maximum());
-
-    this->sbBrut = ui->textEditBrut->verticalScrollBar();
-    this->sbBrut->setValue(this->sbBrut->maximum());
-
-    this->sbInvad = ui->textEditInvad->verticalScrollBar();
-    this->sbInvad->setValue(this->sbInvad->maximum());
 
     ui->label->setFont(Greenscr);
     ui->label->setSizePolicy(QSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed));
     ui->labelYear->setFont(Greenscr);
     ui->labelDotAnim->setFont(Greenscr);
+    ui->labelArbre->setFont(Greenscr);
+    ui->labelArbre_2->setFont(Greenscr);
+    ui->labelArbre_3->setFont(Greenscr);
+    ui->labelArbre_4->setFont(Greenscr);
     ui->progressBarTree->setFont(Greenscr);
     ui->progressBarHerbi->setFont(Greenscr);
     ui->progressBarCarni->setFont(Greenscr);
@@ -82,100 +85,145 @@ sudo DISPLAY=:0 ./ISIB_LifeGameClient
     ui->textEditBrut->setFont(Greenscr);
     ui->textEditInvad->setFont(Greenscr);
 
-    this->timerGpio->start(250);
-
     QMainWindow::showFullScreen();
     QApplication::setOverrideCursor(Qt::BlankCursor);
+
+     /*this->sbHerbi = ui->textEditHerbi->verticalScrollBar();
+     this->sbHerbi->setValue(this->sbHerbi->maximum());
+
+     this->sbCarni = ui->textEditCarni->verticalScrollBar();
+     this->sbCarni->setValue(this->sbCarni->maximum());
+
+     this->sbBrut = ui->textEditBrut->verticalScrollBar();
+     this->sbBrut->setValue(this->sbBrut->maximum());
+
+     this->sbInvad = ui->textEditInvad->verticalScrollBar();
+     this->sbInvad->setValue(this->sbInvad->maximum());
+
+    this->sbTree = ui->textEditTree->verticalScrollBar();
+    this->sbTree->setValue(this->sbTree->maximum());
+*/
+
 }
 
+void MainWindowLifeGame::autoReconnect()
+{
+    ui->textEditTree->clear();
+    ui->textEditHerbi->clear();
+    ui->textEditCarni->clear();
+    ui->textEditInvad->clear();
+
+    ui->labelYear->setText("Annee : ");
+    ui->progressBarTree->setValue(0);
+    ui->progressBarHerbi->setValue(0);
+    ui->progressBarCarni->setValue(0);
+    ui->progressBarInvade->setValue(0);
+
+    bool connected = false;
+    while(!(connected)){
+        this->socket->connectToHost(this->ip,this->port);
+        if( this->socket->waitForConnected(5000) ) {
+           this->socket->write("HELLO SERVER[/TCP]");
+           this->socket->flush();
+           connected = true;
+        }
+    }
+
+}
 
 void MainWindowLifeGame::readTcpData()
 {
-    QRegExp Tnbr("Tree NBR ([0-9]+)");
-    QRegExp Herbr("Herbi NBR ([0-9]+)");
-    QRegExp Carbr("Carni NBR ([0-9]+)");
-    QRegExp Invbr("Invad NBR ([0-9]+)");
-    QRegExp YearBr("YEAR ([0-9]+)");
 
-    QString data =  this->socket->readAll();
-    //this->socket->flush();
+    data =  this->socket->readLine();
+    this->socket->flush();
 
     ui->textEditBrut->setText(ui->textEditBrut->toPlainText()+">"+data);
-    this->sbBrut->setValue(sbBrut->maximum());
-
-    //qDebug() << Tnbr.indexIn(data);
-    if(Tnbr.indexIn(data)==0)
+    //this->sbBrut->setValue(sbBrut->maximum());
+    if (ui->textEditBrut->toPlainText().size() > 170)
     {
-        this->dataTab[0]=Tnbr.cap(1).toInt() / 10.0;
-        ui->textEditTree->setText(ui->textEditTree->toPlainText()+"\n"+Tnbr.cap(1));
+        cursor = ui->textEditBrut->textCursor();
+        cursor.setPosition(QTextCursor::Start);
+        cursor.select(QTextCursor::BlockUnderCursor);
+        cursor.removeSelectedText();
+        ui->textEditBrut->setTextCursor(cursor);
+    }
 
-        if (ui->textEditTree->toPlainText().size() > 80)
+    //qDebug() << ui->textEditBrut->toPlainText().size();
+    if(this->tnbr->indexIn(data)==0)
+    {
+        this->dataTab[0]=this->tnbr->cap(1).toInt() / 10.0;
+        ui->textEditTree->setText(ui->textEditTree->toPlainText()+"\n"+this->tnbr->cap(1));
+
+        if (ui->textEditTree->toPlainText().size() > 40)
         {
-             QTextCursor cursor = ui->textEditTree->textCursor();
-             cursor.movePosition(QTextCursor::Start);
-             cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, 5);
+            cursor = ui->textEditTree->textCursor();
+            cursor.setPosition(QTextCursor::Start);
+            cursor.select(QTextCursor::BlockUnderCursor);
+            cursor.removeSelectedText();
+            ui->textEditTree->setTextCursor(cursor);
+
+            /* cursor = ui->textEditTree->textCursor();
+             cursor.setPosition(QTextCursor::Start);
+             cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, 1);
              cursor.select(QTextCursor::LineUnderCursor);
              cursor.removeSelectedText();
              cursor.deletePreviousChar();
-             ui->textEditTree->setTextCursor(cursor);
+             ui->textEditTree->setTextCursor(cursor);*/
         }
-        this->sbTree->setValue(sbTree->maximum());
+        //qDebug() << ui->textEditTree->toPlainText().size();
+        //this->sbTree->setValue(sbTree->maximum());
     }
 
-    if(Herbr.indexIn(data)==0)
+    if(this->herbr->indexIn(data)==0)
     {
-        this->dataTab[1]=Herbr.cap(1).toInt();
-        ui->textEditHerbi->setText(ui->textEditHerbi->toPlainText()+"\n"+Herbr.cap(1));
-        if (ui->textEditHerbi->toPlainText().size() > 80)
+        this->dataTab[1]=this->herbr->cap(1).toInt();
+        ui->textEditHerbi->setText(ui->textEditHerbi->toPlainText()+"\n"+this->herbr->cap(1));
+        if (ui->textEditHerbi->toPlainText().size() > 40)
         {
-             QTextCursor cursor = ui->textEditHerbi->textCursor();
-             cursor.movePosition(QTextCursor::Start);
-             cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, 5);
-             cursor.select(QTextCursor::LineUnderCursor);
-             cursor.removeSelectedText();
-             cursor.deletePreviousChar();
-             ui->textEditHerbi->setTextCursor(cursor);
+            cursor = ui->textEditHerbi->textCursor();
+            cursor.setPosition(QTextCursor::Start);
+            cursor.select(QTextCursor::BlockUnderCursor);
+            cursor.removeSelectedText();
+            ui->textEditHerbi->setTextCursor(cursor);
         }
-        this->sbHerbi->setValue(sbHerbi->maximum());
+        //this->sbHerbi->setValue(sbHerbi->maximum());
     }
 
-    if(Carbr.indexIn(data)==0)
+    if(this->carbr->indexIn(data)==0)
     {
-        this->dataTab[2]=Carbr.cap(1).toInt();
-        ui->textEditCarni->setText(ui->textEditCarni->toPlainText()+"\n"+Carbr.cap(1));
-        if (ui->textEditCarni->toPlainText().size() > 80)
+        this->dataTab[2]=this->carbr->cap(1).toInt();
+        ui->textEditCarni->setText(ui->textEditCarni->toPlainText()+"\n"+this->carbr->cap(1));
+        if (ui->textEditCarni->toPlainText().size() > 40)
         {
-             QTextCursor cursor = ui->textEditCarni->textCursor();
-             cursor.movePosition(QTextCursor::Start);
-             cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, 5);
-             cursor.select(QTextCursor::LineUnderCursor);
-             cursor.removeSelectedText();
-             cursor.deletePreviousChar();
-             ui->textEditCarni->setTextCursor(cursor);
+            cursor = ui->textEditCarni->textCursor();
+            cursor.setPosition(QTextCursor::Start);
+            cursor.select(QTextCursor::BlockUnderCursor);
+            cursor.removeSelectedText();
+            ui->textEditCarni->setTextCursor(cursor);
         }
-        this->sbCarni->setValue(sbCarni->maximum());
+        //this->sbCarni->setValue(sbCarni->maximum());
     }
 
-    if(Invbr.indexIn(data)==0)
+    if(this->invbr->indexIn(data)==0)
     {
-        this->dataTab[3]=Invbr.cap(1).toInt();
-        ui->textEditInvad->setText(ui->textEditInvad->toPlainText()+"\n"+Invbr.cap(1));
-        if (ui->textEditInvad->toPlainText().size() > 80)
+        this->dataTab[3]=this->invbr->cap(1).toInt();
+        ui->textEditInvad->setText(ui->textEditInvad->toPlainText()+"\n"+this->invbr->cap(1));
+        if (ui->textEditInvad->toPlainText().size() > 40)
         {
-             QTextCursor cursor = ui->textEditInvad->textCursor();
-             cursor.movePosition(QTextCursor::Start);
-             cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, 5);
-             cursor.select(QTextCursor::LineUnderCursor);
-             cursor.removeSelectedText();
-             cursor.deletePreviousChar();
-             ui->textEditInvad->setTextCursor(cursor);
+            cursor = ui->textEditInvad->textCursor();
+            cursor.setPosition(QTextCursor::Start);
+            cursor.select(QTextCursor::BlockUnderCursor);
+            cursor.removeSelectedText();
+            ui->textEditInvad->setTextCursor(cursor);
         }
-        this->sbInvad->setValue(sbInvad->maximum());
+        //this->sbInvad->setValue(sbInvad->maximum());
     }
 
-    if(YearBr.indexIn(data)==0)
+
+
+    if(this->yearBr->indexIn(data)==0)
     {
-        ui->labelYear->setText("Annee : "+YearBr.cap(1));
+        ui->labelYear->setText("Annee : "+this->yearBr->cap(1));
     }
 
     //qDebug() << this->dataTab[0] << " - " << this->dataTab[1] << " - " << this->dataTab[2] << "\n";
@@ -197,17 +245,17 @@ void MainWindowLifeGame::pushButton()
 {
     if(!this->timerButt->isActive()){
         QString d = "PUSH But[/TCP]";
-        qDebug() << d;
         this->socket->write(d.toStdString().c_str());
         this->socket->flush();
         ui->centralWidget->setStyleSheet("QWidget#centralWidget{border-image: url(:/data/bgRed.png) 0 0 0 0 stretch stretch;}");
-        this->timerButt->start(4000);
+        this->timerButt->start(1000);
     }
 }
 
 void MainWindowLifeGame::changeBG()
 {
      ui->centralWidget->setStyleSheet("QWidget#centralWidget{border-image: url(:/data/bg.png) 0 0 0 0 stretch stretch;}");
+     this->timerButt->stop();
 }
 
 void MainWindowLifeGame::updateDots()

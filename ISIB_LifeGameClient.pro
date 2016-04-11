@@ -14,10 +14,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindowlifegame.cpp \
-    mmapGpio.cpp
+        mmapGpio.cpp
 
 HEADERS  += mainwindowlifegame.h \
-    mmapGpio.h
+        mmapGpio.h
 
 FORMS    += mainwindowlifegame.ui
 

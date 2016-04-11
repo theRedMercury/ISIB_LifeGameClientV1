@@ -4,5 +4,9 @@
         <file>data/Greenscr.ttf</file>
         <file>data/bg.png</file>
         <file>data/bgRed.png</file>
+        <file>data/tree.png</file>
+        <file>data/carni.png</file>
+        <file>data/herbi.png</file>
+        <file>data/invad.png</file>
     </qresource>
 </RCC>
