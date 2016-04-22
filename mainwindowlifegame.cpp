@@ -158,8 +158,8 @@ void MainWindowLifeGame::readTcpData()
         if (ui->textEditTree->toPlainText().size() > 60)
         {
             cursor = ui->textEditTree->textCursor();
-            cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
-            cursor.movePosition(QTextCursor::PreviousBlock, QTextCursor::MoveAnchor);
+            cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+            cursor.movePosition(QTextCursor::PreviousBlock, QTextCursor::KeepAnchor);
             //           cursor.setPosition(QTextCursor::End);
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
@@ -185,8 +185,8 @@ void MainWindowLifeGame::readTcpData()
         if (ui->textEditHerbi->toPlainText().size() > 60)
         {
             cursor = ui->textEditHerbi->textCursor();
-            cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
-            cursor.movePosition(QTextCursor::PreviousBlock, QTextCursor::MoveAnchor);
+            cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+            cursor.movePosition(QTextCursor::PreviousBlock, QTextCursor::KeepAnchor);
 
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
@@ -203,8 +203,8 @@ void MainWindowLifeGame::readTcpData()
         if (ui->textEditCarni->toPlainText().size() > 60)
         {
             cursor = ui->textEditCarni->textCursor();
-            cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
-            cursor.movePosition(QTextCursor::PreviousBlock, QTextCursor::MoveAnchor);
+            cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+            cursor.movePosition(QTextCursor::PreviousBlock, QTextCursor::KeepAnchor);
 
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
@@ -221,8 +221,8 @@ void MainWindowLifeGame::readTcpData()
         if (ui->textEditInvad->toPlainText().size() > 60)
         {
             cursor = ui->textEditInvad->textCursor();
-            cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
-            cursor.movePosition(QTextCursor::PreviousBlock, QTextCursor::MoveAnchor);
+            cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+            cursor.movePosition(QTextCursor::PreviousBlock, QTextCursor::KeepAnchor);
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
             ui->textEditInvad->setTextCursor(cursor);
