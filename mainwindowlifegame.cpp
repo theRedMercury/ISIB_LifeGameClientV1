@@ -145,6 +145,7 @@ void MainWindowLifeGame::readTcpData()
         cursor.setPosition(QTextCursor::Start);
         cursor.select(QTextCursor::BlockUnderCursor);
         cursor.removeSelectedText();
+        cursor.deletePreviousChar();
         ui->textEditBrut->setTextCursor(cursor);
     }
 
@@ -160,6 +161,7 @@ void MainWindowLifeGame::readTcpData()
             cursor.setPosition(QTextCursor::End);
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
+            cursor.deletePreviousChar();
             ui->textEditTree->setTextCursor(cursor);
 
             /* cursor = ui->textEditTree->textCursor();
@@ -184,6 +186,7 @@ void MainWindowLifeGame::readTcpData()
             cursor.setPosition(QTextCursor::End);
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
+            cursor.deletePreviousChar();
             ui->textEditHerbi->setTextCursor(cursor);
         }
         //this->sbHerbi->setValue(sbHerbi->maximum());
@@ -199,6 +202,7 @@ void MainWindowLifeGame::readTcpData()
             cursor.setPosition(QTextCursor::End);
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
+            cursor.deletePreviousChar();
             ui->textEditCarni->setTextCursor(cursor);
         }
         //this->sbCarni->setValue(sbCarni->maximum());
