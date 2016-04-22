@@ -159,7 +159,8 @@ void MainWindowLifeGame::readTcpData()
         {
             cursor = ui->textEditTree->textCursor();
             cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
-            cursor.setPosition(QTextCursor::End);
+            cursor.movePosition(QTextCursor::PreviousBlock, QTextCursor::MoveAnchor);
+            //           cursor.setPosition(QTextCursor::End);
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
             cursor.deletePreviousChar();
@@ -185,7 +186,8 @@ void MainWindowLifeGame::readTcpData()
         {
             cursor = ui->textEditHerbi->textCursor();
             cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
-            cursor.setPosition(QTextCursor::End);
+            cursor.movePosition(QTextCursor::PreviousBlock, QTextCursor::MoveAnchor);
+
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
             cursor.deletePreviousChar();
@@ -202,7 +204,8 @@ void MainWindowLifeGame::readTcpData()
         {
             cursor = ui->textEditCarni->textCursor();
             cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
-            cursor.setPosition(QTextCursor::End);
+            cursor.movePosition(QTextCursor::PreviousBlock, QTextCursor::MoveAnchor);
+
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
             cursor.deletePreviousChar();
@@ -218,7 +221,8 @@ void MainWindowLifeGame::readTcpData()
         if (ui->textEditInvad->toPlainText().size() > 60)
         {
             cursor = ui->textEditInvad->textCursor();
-            cursor.setPosition(QTextCursor::End);
+            cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
+            cursor.movePosition(QTextCursor::PreviousBlock, QTextCursor::MoveAnchor);
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
             ui->textEditInvad->setTextCursor(cursor);
