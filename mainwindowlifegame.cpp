@@ -152,12 +152,12 @@ void MainWindowLifeGame::readTcpData()
     if(this->tnbr->indexIn(data)==0)
     {
         this->dataTab[0]=this->tnbr->cap(1).toInt() / 10.0;
-        ui->textEditTree->setText(ui->textEditTree->toPlainText()+"\n"+this->tnbr->cap(1));
+        ui->textEditTree->setText(this->tnbr->cap(1)+"\n"+ui->textEditTree->toPlainText());
 
-        if (ui->textEditTree->toPlainText().size() > 45)
+        if (ui->textEditTree->toPlainText().size() > 60)
         {
             cursor = ui->textEditTree->textCursor();
-            cursor.setPosition(QTextCursor::Start);
+            cursor.setPosition(QTextCursor::End);
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
             ui->textEditTree->setTextCursor(cursor);
@@ -178,10 +178,10 @@ void MainWindowLifeGame::readTcpData()
     {
         this->dataTab[1]=this->herbr->cap(1).toInt();
         ui->textEditHerbi->setText(ui->textEditHerbi->toPlainText()+"\n"+this->herbr->cap(1));
-        if (ui->textEditHerbi->toPlainText().size() > 45)
+        if (ui->textEditHerbi->toPlainText().size() > 60)
         {
             cursor = ui->textEditHerbi->textCursor();
-            cursor.setPosition(QTextCursor::Start);
+            cursor.setPosition(QTextCursor::End);
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
             ui->textEditHerbi->setTextCursor(cursor);
@@ -193,10 +193,10 @@ void MainWindowLifeGame::readTcpData()
     {
         this->dataTab[2]=this->carbr->cap(1).toInt();
         ui->textEditCarni->setText(ui->textEditCarni->toPlainText()+"\n"+this->carbr->cap(1));
-        if (ui->textEditCarni->toPlainText().size() > 45)
+        if (ui->textEditCarni->toPlainText().size() > 60)
         {
             cursor = ui->textEditCarni->textCursor();
-            cursor.setPosition(QTextCursor::Start);
+            cursor.setPosition(QTextCursor::End);
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
             ui->textEditCarni->setTextCursor(cursor);
@@ -208,10 +208,10 @@ void MainWindowLifeGame::readTcpData()
     {
         this->dataTab[3]=this->invbr->cap(1).toInt();
         ui->textEditInvad->setText(ui->textEditInvad->toPlainText()+"\n"+this->invbr->cap(1));
-        if (ui->textEditInvad->toPlainText().size() > 45)
+        if (ui->textEditInvad->toPlainText().size() > 60)
         {
             cursor = ui->textEditInvad->textCursor();
-            cursor.setPosition(QTextCursor::Start);
+            cursor.setPosition(QTextCursor::End);
             cursor.select(QTextCursor::BlockUnderCursor);
             cursor.removeSelectedText();
             ui->textEditInvad->setTextCursor(cursor);
