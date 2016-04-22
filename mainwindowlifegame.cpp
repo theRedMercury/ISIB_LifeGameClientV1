@@ -152,9 +152,9 @@ void MainWindowLifeGame::readTcpData()
     if(this->tnbr->indexIn(data)==0)
     {
         this->dataTab[0]=this->tnbr->cap(1).toInt() / 10.0;
-        ui->textEditTree->setText(this->tnbr->cap(1)+"\n"+ui->textEditTree->toPlainText());
+        ui->textEditTree->setText(ui->textEditTree->toPlainText()+"\n"+this->tnbr->cap(1));
 
-        if (ui->textEditTree->toPlainText().size() > 60)
+        if (ui->textEditTree->toPlainText().size() > 45)
         {
             cursor = ui->textEditTree->textCursor();
             cursor.setPosition(QTextCursor::Start);
@@ -177,8 +177,8 @@ void MainWindowLifeGame::readTcpData()
     if(this->herbr->indexIn(data)==0)
     {
         this->dataTab[1]=this->herbr->cap(1).toInt();
-        ui->textEditHerbi->setText(this->herbr->cap(1)+"\n"+ui->textEditHerbi->toPlainText());
-        if (ui->textEditHerbi->toPlainText().size() > 60)
+        ui->textEditHerbi->setText(ui->textEditHerbi->toPlainText()+"\n"+this->herbr->cap(1));
+        if (ui->textEditHerbi->toPlainText().size() > 45)
         {
             cursor = ui->textEditHerbi->textCursor();
             cursor.setPosition(QTextCursor::Start);
@@ -192,8 +192,8 @@ void MainWindowLifeGame::readTcpData()
     if(this->carbr->indexIn(data)==0)
     {
         this->dataTab[2]=this->carbr->cap(1).toInt();
-        ui->textEditCarni->setText(this->carbr->cap(1)+"\n"+ui->textEditCarni->toPlainText());
-        if (ui->textEditCarni->toPlainText().size() > 60)
+        ui->textEditCarni->setText(ui->textEditCarni->toPlainText()+"\n"+this->carbr->cap(1));
+        if (ui->textEditCarni->toPlainText().size() > 45)
         {
             cursor = ui->textEditCarni->textCursor();
             cursor.setPosition(QTextCursor::Start);
@@ -207,8 +207,8 @@ void MainWindowLifeGame::readTcpData()
     if(this->invbr->indexIn(data)==0)
     {
         this->dataTab[3]=this->invbr->cap(1).toInt();
-        ui->textEditInvad->setText(this->invbr->cap(1)+"\n"+ui->textEditInvad->toPlainText());
-        if (ui->textEditInvad->toPlainText().size() > 60)
+        ui->textEditInvad->setText(ui->textEditInvad->toPlainText()+"\n"+this->invbr->cap(1));
+        if (ui->textEditInvad->toPlainText().size() > 45)
         {
             cursor = ui->textEditInvad->textCursor();
             cursor.setPosition(QTextCursor::Start);
